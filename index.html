@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section>
+        <h1 id="bem-vindo">Bem-vindo(a)</h1>
+        <h2 id="descricao-um">Eu desenvolvi esse simples site para você</h2>
+        <h2 id="descricao-dois">converter o nome do seu ticket em um nome de branch</h2>
+        <label for="nome-ticket" id="nome-ticket">Insira o nome do ticket</label>
+        <input id="input-nome-ticket" name="nome-ticket" type="text">
+        <button id="button">Continuar</button>
+        <div id="div-segundo-passo" class="segundo-passo-cores">
+            <h3>Qual o tipo desse ticket?</h3>
+            <button disabled id="button-bug" >BUG</button>
+            <button disabled id="button-fast">FAST</button>
+            <button disabled id="button-melhoria">MELHORIA</button>
+            <button disabled id="button-debito">DEBITO</button>
+            <span hidden id="nome-ticket-span"></span>
+
+        </div>
+
+        <div id="codigos">
+            <pre hidden id="pre-nome-ticket-convertido">
+                <code id="nome-ticket-convertido"></code>
+            </pre>
+            <pre hidden id="pre-comando-git-ticket-span">
+                <code id="comando-git-ticket-span"></code>
+            </pre>
+        </div>
+    </section>
+</body>
+<script src="script.js"></script>
+</html>

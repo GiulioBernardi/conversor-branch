@@ -1,0 +1,186 @@
+html * {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 38px;
+    background-color: rgb(197, 233, 255);
+    height: 100%;
+}
+
+body {
+min-height: 100%;
+
+}
+section{
+    padding: 20px;
+    max-height: 100%;
+}
+
+
+.segundo-passo-cores{
+    /* background-color: rgb(207, e207, 207); */
+    color: rgb(129, 162, 183);
+}
+
+#bem-vindo{
+    text-align: center;
+    margin: 28px 0 28px 0;   
+}
+
+#descricao-dois{
+    margin-bottom: 48px;
+}
+
+#button{
+    border-radius: 8px;
+    background-color: rgb(17, 232, 17);
+    color: rgb(240, 255, 238);
+    padding: 10px 10px 10px 10px;
+    border: 0.05px solid rgb(42, 207, 42);
+    margin-left: 22px;
+    font-weight: 600;
+}
+
+#button:hover{
+    background-color: rgb(0, 164, 0);
+    transition: 0.1s;
+    cursor: pointer;
+
+}
+
+#input-nome-ticket{
+    background-color: white;
+}
+
+#div-segundo-passo{
+    margin: 26px 0 26px 0;
+}
+
+h3{
+    margin-bottom: 22px;
+}
+
+
+
+#button-bug {
+    border-radius: 8px;
+    background-color: rgb(252, 0, 0);
+    color: rgb(0, 0, 0);
+    padding: 10px 10px 10px 10px;
+    border: 0.05px solid rgb(217, 0, 0);
+    margin-left: 0;
+    font-weight: 600;
+}
+
+#button-bug:hover{
+    background-color: rgb(203, 0, 0);
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#button-bug:disabled{
+    /* background-color: rgb(234, 234, 234); */
+    opacity: 10%;
+    cursor: initial;
+    /* border: 0.05px solid rgb(219, 219, 219); */
+    /* color: rgb(219, 219, 219); */
+    /* transition: 0.2s; */
+    /* cursor: pointer; */
+}
+
+#button-fast {
+    border-radius: 8px;
+    background-color: rgb(0, 252, 92);
+    color: rgb(0, 0, 0);
+    padding: 10px 10px 10px 10px;
+    border: 0.05px solid rgb(0, 211, 49);
+    margin-left: 22px;
+    font-weight: 600;
+}
+
+#button-fast:hover{
+    background-color: rgb(0, 201, 74);
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#button-fast:disabled{
+    opacity: 10%;
+    cursor: initial;
+}
+
+
+#button-melhoria {
+    border-radius: 8px;
+    background-color: rgb(0, 252, 92);
+    color: rgb(0, 0, 0);
+    padding: 10px 10px 10px 10px;
+    border: 0.05px solid rgb(0, 211, 49);
+    margin-left: 22px;
+    font-weight: 600;
+}
+
+#button-melhoria:hover{
+    background-color: rgb(0, 201, 74);
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#button-melhoria:disabled{
+    opacity: 10%;
+    cursor: initial;
+}
+
+#button-debito {
+    border-radius: 8px;
+    background-color: rgb(0, 172, 252);
+    color: rgb(0, 0, 0);
+    padding: 10px 10px 10px 10px;
+    border: 0.05px solid rgb(0, 122, 163);
+    margin-left: 22px;
+    font-weight: 600;
+    
+}
+
+#button-debito:hover{
+    background-color: rgb(0, 148, 217);
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#button-debito:disabled{
+    opacity: 10%;
+    cursor: initial;
+}
+
+#codigos{
+    margin-top: 10px;
+}
+
+
+
+#pre-nome-ticket-convertido{
+    margin: 70px 0 40px 0;
+    padding: 20px 20px 20px 0;
+
+}
+
+#nome-ticket-convertido{
+    font-size: 14px;
+    padding: 40px 600px 40px 20px;
+    font-family: monospace;
+    background-color: rgba(220, 219, 219, 0.699);
+    border-radius: 12px;
+}
+
+#pre-comando-git-ticket-span{
+    margin: 70px 0 40px 0;
+    padding: 20px 20px 20px 0;
+}
+
+#comando-git-ticket-span{
+    font-size: 14px;
+    padding: 40px 600px 40px 20px;
+    font-family: monospace;
+    background-color: rgba(220, 219, 219, 0.699);
+    border-radius: 12px;
+}
+

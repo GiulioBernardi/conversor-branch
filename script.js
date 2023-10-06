@@ -252,6 +252,12 @@ removeLetraComAcento = function(letra){
     else if(letra === 'Ẽ'){
         return 'E';
     }
+    else if(letra === 'È'){
+        return 'E';
+    }
+    else if(letra === 'è'){
+        return 'e';
+    }
     else if(letra === 'í'){
         return 'i';
     }
@@ -283,7 +289,7 @@ removeLetraComAcento = function(letra){
         return 'U';
     }
 
-    let letrasComAcento = ['á', 'à', 'â', 'ã', 'ç', 'é', 'ê', 'ẽ', 'í', 'ó', 'ô', 'õ', 'ú', 'ü'];
+    let letrasComAcento = ['á', 'à', 'â', 'ã', 'ç', 'é', 'ê', 'ẽ', 'è', 'í', 'ó', 'ô', 'õ', 'ú', 'ü'];
 }
 
 toLowerCaseCaseiro = function(letra) {
@@ -375,7 +381,7 @@ configuraListasStringUtils = function(){
         ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'
     ];
     letrasMaiusculas = ['A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U','V', 'W', 'X', 'Y', 'Z']
-    letrasComAcento = ['á', 'à', 'â', 'ã', 'ç', 'é', 'ê', 'ẽ', 'í', 'ó', 'ô', 'õ', 'ú', 'ü','Á', 'À', 'Â', 'Ã', 'Ç', 'É', 'Ê', 'Ẽ', 'Í', 'Ó', 'Ô', 'Õ', 'Ú', 'Ü'];
+    letrasComAcento = ['á', 'à', 'â', 'ã', 'ç', 'é', 'ê', 'ẽ', 'è', 'í', 'ó', 'ô', 'õ', 'ú', 'ü','Á', 'À', 'Â', 'Ã', 'Ç', 'É', 'Ê', 'Ẽ', 'È', 'Í', 'Ó', 'Ô', 'Õ', 'Ú', 'Ü'];
 }
 
 obtemNomeDoTicket = function(){

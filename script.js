@@ -114,6 +114,7 @@ button.onclick = function(){
     }
     ticketConvertidoParaBranch = ticketSemEspacosEmBranco;
     
+    removeLetrasComAcento();
 
     //transforma todas as palavras para lower case
     // ticketConvertidoParaBranch = ticketConvertidoParaBranch.map(palavra => palavra.toLowerCase());
@@ -135,15 +136,10 @@ button.onclick = function(){
         }
         ticketComLetrasVazias.push(palavraSemLetraMaiuscula);
     }
-    
     ticketConvertidoParaBranch = ticketComLetrasVazias;
 
 
-    //remove letras com acento
-
-    removeLetrasComAcento();
-
-
+    
 
 
     let nomeBranch = nomeTicketConvertidoParaBranch.join('-')

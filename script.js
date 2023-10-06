@@ -35,16 +35,11 @@ button.onclick = function(){
     removeEspacosEmBrancoCaseiro();
 
 
-    
-
-
-    
-
     //remove caracteres especiais
     // ticketConvertidoParaBranch = nomeTicketPalavras.filter(palavra => !caracteresParaRemover.includes(palavra));
     nomeTicketPalavrasSemCaracteresEspeciais = []
-    for(let j=0; j<nomeTicketPalavras.length; j++){
-        let palavra = nomeTicketPalavras[j];
+    for(let j=0; j<nomeTicketConvertidoParaBranch.length; j++){
+        let palavra = nomeTicketConvertidoParaBranch[j];
         let palavraSemSpecialChar = '';
         let indexComSpecialChar = null
 
@@ -65,15 +60,15 @@ button.onclick = function(){
             nomeTicketPalavrasSemCaracteresEspeciais.push(palavraSemSpecialChar);
         }
     }
-    nomeTicketPalavras = nomeTicketPalavrasSemCaracteresEspeciais;
+    nomeTicketConvertidoParaBranch = nomeTicketPalavrasSemCaracteresEspeciais;
 
 
     //remove o tipo de ticket do nome
     // ticketConvertidoParaBranch = nomeTicketPalavras.filter(palavra => !tiposDeTicket.includes(palavra));
     let ticketSemTipo = []
     let indexDoTicketQueContemTipo= null
-    for(let i=0; i<nomeTicketPalavras.length; i++){
-        palavra = nomeTicketPalavras[i];
+    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
+        palavra = nomeTicketConvertidoParaBranch[i];
         
         for(let j=0; j<=tiposDeTicket.length; j++){
             if(palavra === tiposDeTicket[j]){
@@ -81,20 +76,20 @@ button.onclick = function(){
             }
         }
     }    
-    for(let k=0; k<nomeTicketPalavras.length; k++){
+    for(let k=0; k<nomeTicketConvertidoParaBranch.length; k++){
         if(k !== indexDoTicketQueContemTipo){
-            ticketSemTipo.push(nomeTicketPalavras[k]);
+            ticketSemTipo.push(nomeTicketConvertidoParaBranch[k]);
         }
     }
-    nomeTicketPalavras = ticketSemTipo;
+    nomeTicketConvertidoParaBranch = ticketSemTipo;
 
 
 
     //remove todos os espacos vazios
     // ticketConvertidoParaBranch = ticketConvertidoParaBranch.filter(palavra => palavra.replace(' ', ''));
     let ticketSemEspacosEmBranco = []
-    for(let i = 0; i<nomeTicketPalavras.length; i++){
-        let palavra = nomeTicketPalavras[i]
+    for(let i = 0; i<nomeTicketConvertidoParaBranch.length; i++){
+        let palavra = nomeTicketConvertidoParaBranch[i]
      //   ['M', ' ', 'o', 'b', 'i', 'l', 'e'];
         let indexComPalavraVazia = null
         for(let k=0; k<palavra.length; k++){
@@ -112,14 +107,13 @@ button.onclick = function(){
             ticketSemEspacosEmBranco.push(palavraSemEspacoVazio);
         }
     }
-    ticketConvertidoParaBranch = ticketSemEspacosEmBranco;
+    nomeTicketConvertidoParaBranch = ticketSemEspacosEmBranco;
     
     removeLetrasComAcento();
 
     //transforma todas as palavras para lower case
     // ticketConvertidoParaBranch = ticketConvertidoParaBranch.map(palavra => palavra.toLowerCase());
     ticketComLetrasVazias = []
-
     for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
         let palavra = nomeTicketConvertidoParaBranch[i];
         let palavraSemLetraMaiuscula = '';

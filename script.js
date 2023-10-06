@@ -32,7 +32,6 @@ button.onclick = function(){
     
     
     // let nomeTicketPalavras = nomeTicket.split(' ').map(palavra => palavra.trim());
-
     removeEspacosEmBrancoCaseiro();
 
 
@@ -115,6 +114,7 @@ button.onclick = function(){
     }
     ticketConvertidoParaBranch = ticketSemEspacosEmBranco;
     
+
     //transforma todas as palavras para lower case
     // ticketConvertidoParaBranch = ticketConvertidoParaBranch.map(palavra => palavra.toLowerCase());
     ticketComLetrasVazias = []
@@ -138,28 +138,15 @@ button.onclick = function(){
     
     ticketConvertidoParaBranch = ticketComLetrasVazias;
 
-    let ticketSemLetraComAcento = [];
-    for(let i=0; i<ticketConvertidoParaBranch.length; i++){
-        palavra = ticketConvertidoParaBranch[i];
-        let palavraSemAcento = '';
-        for(let l=0; l<palavra.length; l++){
-            letra = palavra[l];
-            let isLetraComAcento = letrasComAcento.includes(letra);
-            debugger;
-            if(isLetraComAcento){
-                letra = removeLetraComAcento(letra);
-            }
-            palavraSemAcento += letra;
-        }
-        ticketSemLetraComAcento.push(palavraSemAcento);
-    }
 
+    //remove letras com acento
 
-    ticketConvertidoParaBranch = ticketSemLetraComAcento;
+    removeLetrasComAcento();
 
 
 
-    let nomeBranch = ticketConvertidoParaBranch.join('-')
+
+    let nomeBranch = nomeTicketConvertidoParaBranch.join('-')
 
 
     document.getElementById('nome-ticket-span').innerHTML = nomeBranch;
@@ -371,4 +358,25 @@ removeEspacosEmBrancoCaseiro = function(){
         
     }
     nomeTicketConvertidoParaBranch  = nomeTicketPalavras;
+}
+
+
+removeLetrasComAcento = function(){
+    debugger;
+    let ticketSemLetraComAcento = [];
+    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
+        let palavra = nomeTicketConvertidoParaBranch[i];
+        let palavraSemAcento = '';
+        for(let l=0; l<palavra.length; l++){
+            letra = palavra[l];
+            let isLetraComAcento = letrasComAcento.includes(letra);
+            debugger;
+            if(isLetraComAcento){
+                letra = removeLetraComAcento(letra);
+            }
+            palavraSemAcento += letra;
+        }
+        ticketSemLetraComAcento.push(palavraSemAcento);
+    }
+    nomeTicketConvertidoParaBranch = ticketSemLetraComAcento;
 }

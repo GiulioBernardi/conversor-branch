@@ -34,11 +34,6 @@ button.onclick = function(){
     // let nomeTicketPalavras = nomeTicket.split(' ').map(palavra => palavra.trim());
 
     removeEspacosEmBrancoCaseiro();
-
-
-    
-
-
     
 
     //remove caracteres especiais
@@ -345,7 +340,8 @@ configuraListasStringUtils = function(){
     tiposDeTicket = ['Bug', 'Fast', 'Story', 'Melhoria', 'Debt', 'Milestone']
     caracteresParaRemover = [
         '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/',
-        ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'
+        ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~',
+        'ª', 'º', '°'
     ];
     letrasMaiusculas = ['A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U','V', 'W', 'X', 'Y', 'Z']
     letrasComAcento = ['á', 'à', 'â', 'ã', 'ç', 'é', 'ê', 'ẽ', 'í', 'ó', 'ô', 'õ', 'ú', 'ü'];

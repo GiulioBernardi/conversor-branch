@@ -32,15 +32,14 @@ button.onclick = function(){
     
     
     // let nomeTicketPalavras = nomeTicket.split(' ').map(palavra => palavra.trim());
-
     removeEspacosEmBrancoCaseiro();
     
 
     //remove caracteres especiais
     // ticketConvertidoParaBranch = nomeTicketPalavras.filter(palavra => !caracteresParaRemover.includes(palavra));
     nomeTicketPalavrasSemCaracteresEspeciais = []
-    for(let j=0; j<nomeTicketPalavras.length; j++){
-        let palavra = nomeTicketPalavras[j];
+    for(let j=0; j<nomeTicketConvertidoParaBranch.length; j++){
+        let palavra = nomeTicketConvertidoParaBranch[j];
         let palavraSemSpecialChar = '';
         let indexComSpecialChar = null
 
@@ -61,15 +60,15 @@ button.onclick = function(){
             nomeTicketPalavrasSemCaracteresEspeciais.push(palavraSemSpecialChar);
         }
     }
-    nomeTicketPalavras = nomeTicketPalavrasSemCaracteresEspeciais;
+    nomeTicketConvertidoParaBranch = nomeTicketPalavrasSemCaracteresEspeciais;
 
 
     //remove o tipo de ticket do nome
     // ticketConvertidoParaBranch = nomeTicketPalavras.filter(palavra => !tiposDeTicket.includes(palavra));
     let ticketSemTipo = []
     let indexDoTicketQueContemTipo= null
-    for(let i=0; i<nomeTicketPalavras.length; i++){
-        palavra = nomeTicketPalavras[i];
+    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
+        palavra = nomeTicketConvertidoParaBranch[i];
         
         for(let j=0; j<=tiposDeTicket.length; j++){
             if(palavra === tiposDeTicket[j]){
@@ -77,20 +76,20 @@ button.onclick = function(){
             }
         }
     }    
-    for(let k=0; k<nomeTicketPalavras.length; k++){
+    for(let k=0; k<nomeTicketConvertidoParaBranch.length; k++){
         if(k !== indexDoTicketQueContemTipo){
-            ticketSemTipo.push(nomeTicketPalavras[k]);
+            ticketSemTipo.push(nomeTicketConvertidoParaBranch[k]);
         }
     }
-    nomeTicketPalavras = ticketSemTipo;
+    nomeTicketConvertidoParaBranch = ticketSemTipo;
 
 
 
     //remove todos os espacos vazios
     // ticketConvertidoParaBranch = ticketConvertidoParaBranch.filter(palavra => palavra.replace(' ', ''));
     let ticketSemEspacosEmBranco = []
-    for(let i = 0; i<nomeTicketPalavras.length; i++){
-        let palavra = nomeTicketPalavras[i]
+    for(let i = 0; i<nomeTicketConvertidoParaBranch.length; i++){
+        let palavra = nomeTicketConvertidoParaBranch[i]
      //   ['M', ' ', 'o', 'b', 'i', 'l', 'e'];
         let indexComPalavraVazia = null
         for(let k=0; k<palavra.length; k++){
@@ -108,14 +107,15 @@ button.onclick = function(){
             ticketSemEspacosEmBranco.push(palavraSemEspacoVazio);
         }
     }
-    ticketConvertidoParaBranch = ticketSemEspacosEmBranco;
+    nomeTicketConvertidoParaBranch = ticketSemEspacosEmBranco;
     
+    removeLetrasComAcento();
+
     //transforma todas as palavras para lower case
     // ticketConvertidoParaBranch = ticketConvertidoParaBranch.map(palavra => palavra.toLowerCase());
     ticketComLetrasVazias = []
-
-    for(let i=0; i<ticketConvertidoParaBranch.length; i++){
-        let palavra = ticketConvertidoParaBranch[i];
+    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
+        let palavra = nomeTicketConvertidoParaBranch[i];
         let palavraSemLetraMaiuscula = '';
         for(let j=0; j<palavra.length; j++){
             letra = palavra[j];
@@ -130,31 +130,13 @@ button.onclick = function(){
         }
         ticketComLetrasVazias.push(palavraSemLetraMaiuscula);
     }
+    nomeTicketConvertidoParaBranch = ticketComLetrasVazias;
+
+
     
-    ticketConvertidoParaBranch = ticketComLetrasVazias;
-
-    let ticketSemLetraComAcento = [];
-    for(let i=0; i<ticketConvertidoParaBranch.length; i++){
-        palavra = ticketConvertidoParaBranch[i];
-        let palavraSemAcento = '';
-        for(let l=0; l<palavra.length; l++){
-            letra = palavra[l];
-            let isLetraComAcento = letrasComAcento.includes(letra);
-            debugger;
-            if(isLetraComAcento){
-                letra = removeLetraComAcento(letra);
-            }
-            palavraSemAcento += letra;
-        }
-        ticketSemLetraComAcento.push(palavraSemAcento);
-    }
 
 
-    ticketConvertidoParaBranch = ticketSemLetraComAcento;
-
-
-
-    let nomeBranch = ticketConvertidoParaBranch.join('-')
+    let nomeBranch = nomeTicketConvertidoParaBranch.join('-')
 
 
     document.getElementById('nome-ticket-span').innerHTML = nomeBranch;
@@ -222,36 +204,92 @@ botaoDebito.onclick = function(){
 
 
 removeLetraComAcento = function(letra){
+    debugger;
     if(letra === 'á'){
         return 'a';
+    }else if(letra === 'Á'){
+        return 'A';
     }
     else if(letra === 'à'){
         return 'a';
-    }else if(letra === 'â'){
+    }
+    else if(letra === 'À'){
+        return 'A';
+    }
+    else if(letra === 'â'){
         return 'a';
-    }else if(letra === 'ã'){
+    }
+    else if(letra === 'Â'){
+        return 'A';
+    }
+    else if(letra === 'ã'){
         return 'a';
-    }else if(letra === 'ç'){
+    }
+    else if(letra === 'Ã'){
+        return 'A'
+    }
+    else if(letra === 'ç'){
         return 'c';
-    }else if(letra === 'é'){
+    }
+    else if(letra === 'Ç'){
+        return 'C';
+    }
+    else if(letra === 'é'){
         return 'e';
-    }else if(letra === 'ê'){
+    }
+    else if(letra === 'É'){
+        return 'E';
+    }
+    else if(letra === 'ê'){
         return 'e';
-    }else if(letra === 'ẽ'){
+    }
+    else if(letra === 'Ê'){
+        return 'E';
+    }
+    else if(letra === 'ẽ'){
         return 'e';
-    }else if(letra === 'í'){
+    }
+    else if(letra === 'Ẽ'){
+        return 'E';
+    }
+    else if(letra === 'È'){
+        return 'E';
+    }
+    else if(letra === 'è'){
+        return 'e';
+    }
+    else if(letra === 'í'){
         return 'i';
-    }else if(letra === 'ó'){
+    }
+    else if(letra === 'Í'){
+        return 'I';
+    }
+    else if(letra === 'ó'){
         return 'o';
-    }else if(letra === 'õ'){
+    }
+    else if(letra === 'Ó'){
+        return 'O';
+    }
+    else if(letra === 'õ'){
         return 'o';
-    }else if(letra === 'ô'){
+    }
+    else if(letra === 'Õ'){
+        return 'O';
+    }
+    else if(letra === 'ô'){
         return 'o';
-    }else if(letra === 'ú'){
+    }
+    else if(letra === 'Ô'){
+        return 'O';
+    }
+    else if(letra === 'ú'){
         return 'u';
     }
+    else if(letra === 'Ú'){
+        return 'U';
+    }
 
-    let letrasComAcento = ['á', 'à', 'â', 'ã', 'ç', 'é', 'ê', 'ẽ', 'í', 'ó', 'ô', 'õ', 'ú', 'ü'];
+    let letrasComAcento = ['á', 'à', 'â', 'ã', 'ç', 'é', 'ê', 'ẽ', 'è', 'í', 'ó', 'ô', 'õ', 'ú', 'ü'];
 }
 
 toLowerCaseCaseiro = function(letra) {
@@ -344,7 +382,7 @@ configuraListasStringUtils = function(){
         'ª', 'º', '°'
     ];
     letrasMaiusculas = ['A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U','V', 'W', 'X', 'Y', 'Z']
-    letrasComAcento = ['á', 'à', 'â', 'ã', 'ç', 'é', 'ê', 'ẽ', 'í', 'ó', 'ô', 'õ', 'ú', 'ü'];
+    letrasComAcento = ['á', 'à', 'â', 'ã', 'ç', 'é', 'ê', 'ẽ', 'è', 'í', 'ó', 'ô', 'õ', 'ú', 'ü','Á', 'À', 'Â', 'Ã', 'Ç', 'É', 'Ê', 'Ẽ', 'È', 'Í', 'Ó', 'Ô', 'Õ', 'Ú', 'Ü'];
 }
 
 obtemNomeDoTicket = function(){
@@ -352,7 +390,6 @@ obtemNomeDoTicket = function(){
 }
 
 removeEspacosEmBrancoCaseiro = function(){
-    debugger;
     nomeTicketPalavras = [];
     for(let i=0; i<=nomeTicket.length; i++){
         palavra = ''
@@ -367,4 +404,23 @@ removeEspacosEmBrancoCaseiro = function(){
         
     }
     nomeTicketConvertidoParaBranch  = nomeTicketPalavras;
+}
+
+
+removeLetrasComAcento = function(){
+    let ticketSemLetraComAcento = [];
+    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
+        let palavra = nomeTicketConvertidoParaBranch[i];
+        let palavraSemAcento = '';
+        for(let l=0; l<palavra.length; l++){
+            letra = palavra[l];
+            let isLetraComAcento = letrasComAcento.includes(letra);
+            if(isLetraComAcento){
+                letra = removeLetraComAcento(letra);
+            }
+            palavraSemAcento += letra;
+        }
+        ticketSemLetraComAcento.push(palavraSemAcento);
+    }
+    nomeTicketConvertidoParaBranch = ticketSemLetraComAcento;
 }

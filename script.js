@@ -6,6 +6,7 @@ let botaoDebito = document.getElementById('button-debito');
 let nomeBranchParaCopiar = document.getElementById('pre-nome-ticket-convertido');
 let comandoGitParaCopiar = document.getElementById('pre-comando-git-ticket-span');
 let button = document.getElementById('button');
+let prefixo = '';
 
 let tiposDeTicket = [];
 let caracteresParaRemover = [];
@@ -16,11 +17,6 @@ let nomeTicket = '';
 let nomeTicketConvertidoParaBranch = '';
 
 button.onclick = function(){
-    let ticketConvertidoParaBranch = '';
-    // nomeTicketPalavras = ['#327049', '-', ' ', '[M obile', 'Inventário]', 'Ao', 'informar', 'um', 'GTIN', 'que', 'está', 'no', 'endereço', 'não', 'é', 'possível', 'informar', 'apenas', 'a', 'Qtd', 'Bug']
-
-            
-
     obtemNomeDoTicket();
 
     if(nomeTicket === ''){
@@ -29,182 +25,53 @@ button.onclick = function(){
     }
 
     configuraListasStringUtils();
-    
-    
-    // let nomeTicketPalavras = nomeTicket.split(' ').map(palavra => palavra.trim());
     removeEspacosEmBrancoCaseiro();
-    
-
-    //remove caracteres especiais
-    // ticketConvertidoParaBranch = nomeTicketPalavras.filter(palavra => !caracteresParaRemover.includes(palavra));
-    nomeTicketPalavrasSemCaracteresEspeciais = []
-    for(let j=0; j<nomeTicketConvertidoParaBranch.length; j++){
-        let palavra = nomeTicketConvertidoParaBranch[j];
-        let palavraSemSpecialChar = '';
-        let indexComSpecialChar = null
-
-        for(let p=0; p<palavra.length; p++){
-            for(let k=0; k <= caracteresParaRemover.length; k++){
-                if(palavra[p] === caracteresParaRemover[k]){
-                    indexComSpecialChar = p;
-                }
-            }    
-        }
-        
-        for(let l = 0; l<palavra.length; l++){
-            if(l !== indexComSpecialChar && palavra != '' || indexComSpecialChar === null){
-                palavraSemSpecialChar += palavra[l];
-            }
-        }
-        if(palavraSemSpecialChar !== ''){
-            nomeTicketPalavrasSemCaracteresEspeciais.push(palavraSemSpecialChar);
-        }
-    }
-    nomeTicketConvertidoParaBranch = nomeTicketPalavrasSemCaracteresEspeciais;
-
-
-    //remove o tipo de ticket do nome
-    // ticketConvertidoParaBranch = nomeTicketPalavras.filter(palavra => !tiposDeTicket.includes(palavra));
-    let ticketSemTipo = []
-    let indexDoTicketQueContemTipo= null
-    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
-        palavra = nomeTicketConvertidoParaBranch[i];
-        
-        for(let j=0; j<=tiposDeTicket.length; j++){
-            if(palavra === tiposDeTicket[j]){
-                indexDoTicketQueContemTipo = i;
-            }
-        }
-    }    
-    for(let k=0; k<nomeTicketConvertidoParaBranch.length; k++){
-        if(k !== indexDoTicketQueContemTipo){
-            ticketSemTipo.push(nomeTicketConvertidoParaBranch[k]);
-        }
-    }
-    nomeTicketConvertidoParaBranch = ticketSemTipo;
-
-
-
-    //remove todos os espacos vazios
-    // ticketConvertidoParaBranch = ticketConvertidoParaBranch.filter(palavra => palavra.replace(' ', ''));
-    let ticketSemEspacosEmBranco = []
-    for(let i = 0; i<nomeTicketConvertidoParaBranch.length; i++){
-        let palavra = nomeTicketConvertidoParaBranch[i]
-     //   ['M', ' ', 'o', 'b', 'i', 'l', 'e'];
-        let indexComPalavraVazia = null
-        for(let k=0; k<palavra.length; k++){
-            if(palavra[k] === ' ' || palavra[k] === ''){
-                indexComPalavraVazia = k
-            }
-        }
-        let palavraSemEspacoVazio = '';
-        for(let j=0; j<palavra.length; j++){
-            if(j !== indexComPalavraVazia){
-                palavraSemEspacoVazio += palavra[j];
-            }
-        }
-        if(palavraSemEspacoVazio !== ''){
-            ticketSemEspacosEmBranco.push(palavraSemEspacoVazio);
-        }
-    }
-    nomeTicketConvertidoParaBranch = ticketSemEspacosEmBranco;
-    
+    removeCaracteresEspeciais();
+    removeTipoDoTicket();
+    removeEspacosEmBranco();
     removeLetrasComAcento();
+    converteLetrasParaMinuscula();
+    concatenaNomeTicketListaSeparandoPorHifen();
 
-    //transforma todas as palavras para lower case
-    // ticketConvertidoParaBranch = ticketConvertidoParaBranch.map(palavra => palavra.toLowerCase());
-    ticketComLetrasVazias = []
-    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
-        let palavra = nomeTicketConvertidoParaBranch[i];
-        let palavraSemLetraMaiuscula = '';
-        for(let j=0; j<palavra.length; j++){
-            letra = palavra[j];
-            
-            
-            let isLetraMaiuscula = letrasMaiusculas.includes(letra);
-            if(isLetraMaiuscula){
-                letra = toLowerCaseCaseiro(letra);
-            }
-            palavraSemLetraMaiuscula += letra;
-        
-        }
-        ticketComLetrasVazias.push(palavraSemLetraMaiuscula);
-    }
-    nomeTicketConvertidoParaBranch = ticketComLetrasVazias;
-
-
-    
-
-
-    let nomeBranch = nomeTicketConvertidoParaBranch.join('-')
-
-
-    document.getElementById('nome-ticket-span').innerHTML = nomeBranch;
+    document.getElementById('nome-ticket-span').innerHTML = nomeTicketConvertidoParaBranch;
     botaoBug.disabled = false;
     botaoFast.disabled = false;
     botaoMelhoria.disabled = false;
     botaoDebito.disabled = false;
-
-    
 
     let classe= document.querySelector('#div-segundo-passo');
     classe.classList.remove("segundo-passo-cores");
 
 }
 
-
 nomeBranch = document.getElementById('nome-ticket-span').innerHTML;
 
 
 
 botaoBug.onclick = function(){
-    let nomeBranch = document.getElementById('nome-ticket-span').innerHTML
-
     prefixo = 'bug/';
-    document.getElementById('nome-ticket-convertido').innerHTML = prefixo + nomeBranch;
-    document.getElementById('comando-git-ticket-span').innerHTML = 'git checkout -b ' + prefixo + nomeBranch;
-    document.getElementsByTagName('p').disabled = false;
-    nomeBranchParaCopiar.hidden = false;
-    comandoGitParaCopiar.hidden = false;
-
+    adicionaBranchNaTela(prefixo);
+    habilitarVisibilidadeDoTextoDaBranchNaTela();
 }
 botaoFast.onclick = function(){
-
-    let nomeBranch = document.getElementById('nome-ticket-span').innerHTML;
-
     prefixo = 'feature/';
-    document.getElementById('nome-ticket-convertido').innerHTML = prefixo + nomeBranch;
-    document.getElementById('comando-git-ticket-span').innerHTML = 'git checkout -b ' + prefixo + nomeBranch;
-
-    comandoGitParaCopiar.hidden = false;
-    nomeBranchParaCopiar.hidden = false;
+    adicionaBranchNaTela(prefixo);
+    habilitarVisibilidadeDoTextoDaBranchNaTela();
 }
 botaoMelhoria.onclick = function(){
-
-    let nomeBranch = document.getElementById('nome-ticket-span').innerHTML;
-
     prefixo = 'feature/';
-    document.getElementById('nome-ticket-convertido').innerHTML = prefixo + nomeBranch;
-    document.getElementById('comando-git-ticket-span').innerHTML = 'git checkout -b ' + prefixo + nomeBranch;
-
-    comandoGitParaCopiar.hidden = false;
-    nomeBranchParaCopiar.hidden = false;
+    adicionaBranchNaTela(prefixo);
+    habilitarVisibilidadeDoTextoDaBranchNaTela();
 }
 botaoDebito.onclick = function(){
-
-    let nomeBranch = document.getElementById('nome-ticket-span').innerHTML;
-
     prefixo = 'debt/';
-    document.getElementById('nome-ticket-convertido').innerHTML = prefixo + nomeBranch;
-    document.getElementById('comando-git-ticket-span').innerHTML = 'git checkout -b ' + prefixo + nomeBranch;
-    comandoGitParaCopiar.hidden = false;
-    nomeBranchParaCopiar.hidden = false;
+    adicionaBranchNaTela(prefixo);
+    habilitarVisibilidadeDoTextoDaBranchNaTela();
 }
 
 
 
 removeLetraComAcento = function(letra){
-    debugger;
     if(letra === 'á'){
         return 'a';
     }else if(letra === 'Á'){
@@ -423,4 +290,122 @@ removeLetrasComAcento = function(){
         ticketSemLetraComAcento.push(palavraSemAcento);
     }
     nomeTicketConvertidoParaBranch = ticketSemLetraComAcento;
+}
+
+removeCaracteresEspeciais = function(){
+    nomeTicketPalavrasSemCaracteresEspeciais = []
+    for(let j=0; j<nomeTicketConvertidoParaBranch.length; j++){
+        let palavra = nomeTicketConvertidoParaBranch[j];
+        let palavraSemSpecialChar = '';
+        let indexComSpecialChar = null
+
+        for(let p=0; p<palavra.length; p++){
+            for(let k=0; k <= caracteresParaRemover.length; k++){
+                if(palavra[p] === caracteresParaRemover[k]){
+                    indexComSpecialChar = p;
+                }
+            }    
+        }
+        
+        for(let l = 0; l<palavra.length; l++){
+            debugger;
+            if(l !== indexComSpecialChar && palavra != '' || indexComSpecialChar === null){
+                palavraSemSpecialChar += palavra[l];
+            }
+        }
+        if(palavraSemSpecialChar !== ''){
+            nomeTicketPalavrasSemCaracteresEspeciais.push(palavraSemSpecialChar);
+        }
+    }
+    nomeTicketConvertidoParaBranch = nomeTicketPalavrasSemCaracteresEspeciais;
+}
+
+removeTipoDoTicket = function(){
+    let ticketSemTipo = []
+    let indexDoTicketQueContemTipo= null
+    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
+        palavra = nomeTicketConvertidoParaBranch[i];
+        
+        for(let j=0; j<=tiposDeTicket.length; j++){
+            if(palavra === tiposDeTicket[j]){
+                indexDoTicketQueContemTipo = i;
+            }
+        }
+    }    
+    for(let k=0; k<nomeTicketConvertidoParaBranch.length; k++){
+        if(k !== indexDoTicketQueContemTipo){
+            ticketSemTipo.push(nomeTicketConvertidoParaBranch[k]);
+        }
+    }
+    nomeTicketConvertidoParaBranch = ticketSemTipo;
+}
+
+removeEspacosEmBranco = function(){
+    let ticketSemEspacosEmBranco = []
+    for(let i = 0; i<nomeTicketConvertidoParaBranch.length; i++){
+        let palavra = nomeTicketConvertidoParaBranch[i]
+     //   ['M', ' ', 'o', 'b', 'i', 'l', 'e'];
+        let indexComPalavraVazia = null
+        for(let k=0; k<palavra.length; k++){
+            if(palavra[k] === ' ' || palavra[k] === ''){
+                indexComPalavraVazia = k
+            }
+        }
+        let palavraSemEspacoVazio = '';
+        for(let j=0; j<palavra.length; j++){
+            if(j !== indexComPalavraVazia){
+                palavraSemEspacoVazio += palavra[j];
+            }
+        }
+        if(palavraSemEspacoVazio !== ''){
+            ticketSemEspacosEmBranco.push(palavraSemEspacoVazio);
+        }
+    }
+    nomeTicketConvertidoParaBranch = ticketSemEspacosEmBranco;
+}
+
+converteLetrasParaMinuscula = function(){
+    ticketComLetrasVazias = []
+    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
+        let palavra = nomeTicketConvertidoParaBranch[i];
+        let palavraSemLetraMaiuscula = '';
+        for(let j=0; j<palavra.length; j++){
+            letra = palavra[j];
+            
+            
+            let isLetraMaiuscula = letrasMaiusculas.includes(letra);
+            if(isLetraMaiuscula){
+                letra = toLowerCaseCaseiro(letra);
+            }
+            palavraSemLetraMaiuscula += letra;
+        
+        }
+        ticketComLetrasVazias.push(palavraSemLetraMaiuscula);
+    }
+    nomeTicketConvertidoParaBranch = ticketComLetrasVazias;
+}
+
+concatenaNomeTicketListaSeparandoPorHifen = function(){
+
+    nomeBranchSeparadoPorHifen = '';
+    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
+        if(i !== (nomeTicketConvertidoParaBranch.length - 1)){
+            nomeBranchSeparadoPorHifen += nomeTicketConvertidoParaBranch[i] + '-';
+        }else{
+            nomeBranchSeparadoPorHifen += nomeTicketConvertidoParaBranch[i];
+        }
+        
+    }
+    nomeTicketConvertidoParaBranch = nomeBranchSeparadoPorHifen;
+}
+
+function adicionaBranchNaTela(prefixo){
+    let nomeBranch = document.getElementById('nome-ticket-span').innerHTML
+    document.getElementById('nome-ticket-convertido').innerHTML = prefixo + nomeBranch;
+    document.getElementById('comando-git-ticket-span').innerHTML = 'git checkout -b ' + prefixo + nomeBranch;
+}
+
+habilitarVisibilidadeDoTextoDaBranchNaTela = function(){
+    comandoGitParaCopiar.hidden = false;
+    nomeBranchParaCopiar.hidden = false;
 }

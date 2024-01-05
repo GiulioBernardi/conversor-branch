@@ -6,7 +6,6 @@ let botaoDebito = document.getElementById('button-debito');
 let nomeBranchParaCopiar = document.getElementById('pre-nome-ticket-convertido');
 let comandoGitParaCopiar = document.getElementById('pre-comando-git-ticket-span');
 let button = document.getElementById('button');
-let removerConjuncoes = document.getElementById('remover-conjuncoes-checkbox');
 let prefixo = '';
 
 let tiposDeTicket = [];
@@ -323,7 +322,6 @@ removeCaracteresEspeciais = function(){
 }
 
 removeConjuncoesSimples = function(){
-    debugger;
     let ticketSemConjuncoesSimples = [];
     for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
         palavra = nomeTicketConvertidoParaBranch[i];

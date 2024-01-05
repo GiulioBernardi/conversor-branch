@@ -6,6 +6,7 @@ let botaoDebito = document.getElementById('button-debito');
 let nomeBranchParaCopiar = document.getElementById('pre-nome-ticket-convertido');
 let comandoGitParaCopiar = document.getElementById('pre-comando-git-ticket-span');
 let button = document.getElementById('button');
+let removerConjuncoes = document.getElementById('remover-conjuncoes-checkbox');
 let prefixo = '';
 
 let tiposDeTicket = [];
@@ -30,6 +31,7 @@ button.onclick = function(){
     removeTipoDoTicket();
     removeEspacosEmBranco();
     removeLetrasComAcento();
+    removeConjuncoesSimples();
     converteLetrasParaMinuscula();
     concatenaNomeTicketListaSeparandoPorHifen();
 
@@ -250,6 +252,7 @@ configuraListasStringUtils = function(){
     ];
     letrasMaiusculas = ['A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U','V', 'W', 'X', 'Y', 'Z']
     letrasComAcento = ['á', 'à', 'â', 'ã', 'ç', 'é', 'ê', 'ẽ', 'è', 'í', 'ó', 'ô', 'õ', 'ú', 'ü','Á', 'À', 'Â', 'Ã', 'Ç', 'É', 'Ê', 'Ẽ', 'È', 'Í', 'Ó', 'Ô', 'Õ', 'Ú', 'Ü'];
+    conjuncoesSimples = ['a', 'as', 'o', 'os', 'e', 'da', 'das', 'do', 'dos', 'de', 'de', 'ao', 'aos']
 }
 
 obtemNomeDoTicket = function(){
@@ -308,7 +311,6 @@ removeCaracteresEspeciais = function(){
         }
         
         for(let l = 0; l<palavra.length; l++){
-            debugger;
             if(l !== indexComSpecialChar && palavra != '' || indexComSpecialChar === null){
                 palavraSemSpecialChar += palavra[l];
             }
@@ -318,6 +320,20 @@ removeCaracteresEspeciais = function(){
         }
     }
     nomeTicketConvertidoParaBranch = nomeTicketPalavrasSemCaracteresEspeciais;
+}
+
+removeConjuncoesSimples = function(){
+    debugger;
+    let ticketSemConjuncoesSimples = [];
+    for(let i=0; i<nomeTicketConvertidoParaBranch.length; i++){
+        palavra = nomeTicketConvertidoParaBranch[i];
+        
+        if(!conjuncoesSimples.includes(palavra)){
+            ticketSemConjuncoesSimples.push(palavra);
+        }
+        
+    }
+    nomeTicketConvertidoParaBranch = ticketSemConjuncoesSimples
 }
 
 removeTipoDoTicket = function(){
